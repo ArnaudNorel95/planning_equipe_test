@@ -1,0 +1,26 @@
+[
+  {
+    "id": "PSG",
+    "nom": "Paris Saint-Germain",
+    "numero_grille": 1,
+    "terrain_id": "parc_des_princes"
+  },
+  {
+    "id": "OM",
+    "nom": "Olympique de Marseille",
+    "numero_grille": 2,
+    "terrain_id": "velodrome"
+  },
+  {
+    "id": "OL",
+    "nom": "Olympique Lyonnais",
+    "numero_grille": 3,
+    "terrain_id": "groupama_stadium"
+  },
+  {
+    "id": "LOSC",
+    "nom": "LOSC Lille",
+    "numero_grille": 4,
+    "terrain_id": "pierre_mauroy"
+  }
+]

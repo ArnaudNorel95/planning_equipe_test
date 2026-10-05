@@ -1,0 +1,67 @@
+{
+  "saison": "2025-2026",
+  "semaine_debut": 27,
+  "duree_match_minutes": 120,
+  "journees": [
+    {
+      "numero": 1,
+      "semaine": 35,
+      "date": "2025-08-30",
+      "heure": "21:00",
+      "rencontres": [
+        {"dom": 1, "ext": 4},
+        {"dom": 2, "ext": 3}
+      ]
+    },
+    {
+      "numero": 2,
+      "semaine": 38,
+      "date": "2025-09-20",
+      "heure": "15:00",
+      "rencontres": [
+        {"dom": 3, "ext": 1},
+        {"dom": 4, "ext": 2}
+      ]
+    },
+    {
+      "numero": 3,
+      "semaine": 41,
+      "date": "2025-10-11",
+      "heure": "21:00",
+      "rencontres": [
+        {"dom": 1, "ext": 2},
+        {"dom": 3, "ext": 4}
+      ]
+    },
+    {
+      "numero": 4,
+      "semaine": 7,
+      "date": "2026-02-14",
+      "heure": "21:00",
+      "rencontres": [
+        {"dom": 4, "ext": 1},
+        {"dom": 3, "ext": 2}
+      ]
+    },
+    {
+      "numero": 5,
+      "semaine": 11,
+      "date": "2026-03-14",
+      "heure": "21:00",
+      "rencontres": [
+        {"dom": 1, "ext": 3},
+        {"dom": 2, "ext": 4}
+      ]
+    },
+    {
+      "numero": 6,
+      "semaine": 15,
+      "date": "2026-04-11",
+      "heure": "17:00",
+      "rencontres": [
+        {"dom": 2, "ext": 1},
+        {"dom": 4, "ext": 3}
+      ]
+    }
+  ]
+}

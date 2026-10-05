@@ -1,0 +1,35 @@
+{
+  "parc_des_princes": {
+    "nom": "Parc des Princes",
+    "commune": "Paris",
+    "occupations": [
+      {
+        "date": "2025-09-20",
+        "heure_debut": "15:30",
+        "heure_fin": "17:30",
+        "evenement": "Match U19 National"
+      },
+      {
+        "date": "2026-02-14",
+        "heure_debut": "20:00",
+        "heure_fin": "22:00",
+        "evenement": "Coupe de France (autre club)"
+      }
+    ]
+  },
+  "velodrome": {
+    "nom": "Stade Vélodrome",
+    "commune": "Marseille",
+    "occupations": []
+  },
+  "groupama_stadium": {
+    "nom": "Groupama Stadium",
+    "commune": "Décines-Charpieu",
+    "occupations": []
+  },
+  "pierre_mauroy": {
+    "nom": "Stade Pierre-Mauroy",
+    "commune": "Villeneuve-d'Ascq",
+    "occupations": []
+  }
+}

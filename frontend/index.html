@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Planning Équipe — PSG</title>
+</head>
+<body>
+
+<h1>Planning Équipe — PSG</h1>
+<p id="info">Chargement…</p>
+
+<label>Numéro de grille :
+  <select id="grille"></select>
+</label>
+<button onclick="preview()">Prévisualiser</button>
+<button onclick="save()">Sauvegarder</button>
+
+<br><br>
+
+<table border="1" cellpadding="4" id="table">
+  <thead>
+    <tr>
+      <th>Semaine</th>
+      <th>Journée</th>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Adversaire</th>
+      <th>Dom/Ext</th>
+      <th>Terrain</th>
+      <th>Conflits</th>
+    </tr>
+  </thead>
+  <tbody id="body"></tbody>
+</table>
+
+<script>
+var API = "http://localhost:8080/api";
+
+function loadPlanning() {
+  fetch(API + "/planning/PSG")
+    .then(function(r) { return r.json(); })
+    .then(function(d) { render(d); })
+    .catch(function(e) { document.getElementById("info").textContent = "Erreur : " + e; });
+}
+
+function preview() {
+  var g = Number(document.getElementById("grille").value);
+  fetch(API + "/planning/PSG/conflicts", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({nouveau_numero_grille: g})
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) { render(d, true); });
+}
+
+function save() {
+  var g = Number(document.getElementById("grille").value);
+  fetch(API + "/planning/PSG/grille", {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({nouveau_numero_grille: g})
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) { render(d); });
+}
+
+function render(data, isPreview) {
+  document.getElementById("info").textContent =
+    data.club_nom + " — Grille n°" + data.numero_grille +
+    (isPreview ? "  (prévisualisation)" : "");
+
+  var sel = document.getElementById("grille");
+  sel.innerHTML = "";
+  var all = [data.numero_grille].concat(data.numeros_grilles_disponibles).sort();
+  for (var i = 0; i < all.length; i++) {
+    var o = document.createElement("option");
+    o.value = all[i]; o.textContent = all[i];
+    if (all[i] === data.numero_grille) o.selected = true;
+    sel.appendChild(o);
+  }
+
+  var tbody = document.getElementById("body");
+  tbody.innerHTML = "";
+  for (var i = 0; i < data.semaines.length; i++) {
+    var s = data.semaines[i];
+    var tr = document.createElement("tr");
+    if (!s.match) {
+      tr.innerHTML = "<td>S" + s.numero + "</td><td colspan='7'>—</td>";
+    } else {
+      var m = s.match;
+      var c = m.conflits && m.conflits.length > 0;
+      if (c) tr.style.backgroundColor = "#fcc";
+      tr.innerHTML =
+        "<td>S" + s.numero + "</td>" +
+        "<td>J" + m.journee + "</td>" +
+        "<td>" + m.date + "</td>" +
+        "<td>" + m.heure + "</td>" +
+        "<td>" + m.adversaire + "</td>" +
+        "<td>" + (m.domicile ? "DOM" : "EXT") + "</td>" +
+        "<td>" + m.terrain_nom + "</td>" +
+        "<td>" + (c ? m.conflits.join(", ") : "—") + "</td>";
+    }
+    tbody.appendChild(tr);
+  }
+}
+
+loadPlanning();
+</script>
+</body>
+</html>
