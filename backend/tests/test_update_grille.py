@@ -57,6 +57,18 @@ class TestUpdateGrille:
             if s["match"]:
                 assert s["match"]["conflits"] == []
 
+    async def test_persists_to_file(self, client, equipes_file):
+        """Le PUT doit écrire les modifications dans data/equipes.json."""
+        await client.put(
+            "/api/planning/PSG/grille",
+            json={"nouveau_numero_grille": 3},
+        )
+        import json
+        with open(equipes_file) as f:
+            equipes = json.load(f)
+        psg = next(e for e in equipes if e["id"] == "PSG")
+        assert psg["numero_grille"] == 3
+
     async def test_invalid_grille(self, client):
         resp = await client.put(
             "/api/planning/PSG/grille",

@@ -63,6 +63,18 @@ class TestPreview:
         data = await resp.json()
         assert data["numero_grille"] == 1
 
+    async def test_does_not_write_to_file(self, client, equipes_file):
+        """La prévisualisation ne doit pas modifier le fichier equipes.json."""
+        await client.post(
+            "/api/planning/PSG/conflicts",
+            json={"nouveau_numero_grille": 3},
+        )
+        import json
+        with open(equipes_file) as f:
+            equipes = json.load(f)
+        psg = next(e for e in equipes if e["id"] == "PSG")
+        assert psg["numero_grille"] == 1
+
     async def test_correct_opponents_grille_3(self, client):
         """Avec la grille 3, les adversaires et dom/ext changent."""
         resp = await client.post(

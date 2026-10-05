@@ -129,7 +129,8 @@ async def update_grille(request):
     Met à jour le numéro de grille du club (swap) et retourne le planning
     avec les conflits recalculés.
 
-    Le changement est PERSISTÉ dans request.app["equipes"].
+    Le changement est PERSISTÉ : mise à jour en mémoire (request.app["equipes"])
+    ET écriture dans le fichier data/equipes.json.
 
     Corps de la requête :
     {
